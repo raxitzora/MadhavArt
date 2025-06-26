@@ -46,9 +46,17 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({
 }) => {
   const galleryImages = images.length > 0 ? images : IMGS;
 
-  const [isScreenSizeSm, setIsScreenSizeSm] = useState<boolean>(
-    window.innerWidth <= 640
-  );
+  const [isScreenSizeSm, setIsScreenSizeSm] = useState<boolean>(false);
+
+useEffect(() => {
+  const checkScreen = () => setIsScreenSizeSm(window.innerWidth <= 640);
+
+  checkScreen(); // Initial check on client-side
+  window.addEventListener("resize", checkScreen);
+
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
+
   useEffect(() => {
     const handleResize = () => setIsScreenSizeSm(window.innerWidth <= 640);
     window.addEventListener("resize", handleResize);
@@ -164,7 +172,6 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({
     alt={img.title}
     width={300}
     height={200}
-
     className="w-full h-full max-w-[300px] max-h-[200px]"
   />
   <p className="text-white text-3xl font-extrabold text-center uppercase">{img.title}</p>

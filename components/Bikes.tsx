@@ -28,7 +28,7 @@ const Bikes = () => {
               {/* Bike Name */}
               <CardItem
                 translateZ={50}
-                className="text-2xl font-extrabold text-center text-blue-400"
+                className="text-2xl font-extrabold text-center text-yellow-400"
               >
                 {bike.name}
               </CardItem>

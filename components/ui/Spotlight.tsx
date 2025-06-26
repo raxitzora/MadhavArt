@@ -10,14 +10,14 @@ export const Spotlight = ({ className, fill }: SpotlightProps) => {
   return (
     <svg
       className={cn(
-        "animate-spotlight pointer-events-none absolute z-[1]  h-[169%] w-[138%] lg:w-[84%] opacity-1",
+        "pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%] opacity-100 animate-spotlight",
         className
       )}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 3787 2842"
       fill="none"
     >
-      <g filter="url(#filter)">
+      <g filter="url(#spotlight-blur)">
         <ellipse
           cx="1924.71"
           cy="273.501"
@@ -26,11 +26,11 @@ export const Spotlight = ({ className, fill }: SpotlightProps) => {
           transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
           fill={fill || "white"}
           fillOpacity="0.21"
-        ></ellipse>
+        />
       </g>
       <defs>
         <filter
-          id="filter"
+          id="spotlight-blur"
           x="0.860352"
           y="0.838989"
           width="3785.16"
@@ -38,17 +38,17 @@ export const Spotlight = ({ className, fill }: SpotlightProps) => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
             in2="BackgroundImageFix"
             result="shape"
-          ></feBlend>
+          />
           <feGaussianBlur
             stdDeviation="151"
-            result="effect1_foregroundBlur_1065_8"
-          ></feGaussianBlur>
+            result="effect1_foregroundBlur"
+          />
         </filter>
       </defs>
     </svg>

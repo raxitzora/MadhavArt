@@ -5,38 +5,33 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion"; // fixed incorrect import path
 import { cn } from "@/lib/utils";
 
+type NavItem = {
+  name: string;
+  link: string;
+  icon?: JSX.Element;
+};
 
-export const FloatingNav = ({
-  navItems,
-  className,
-}: {
-  navItems: {
-    name: string;
-    link: string;
-    icon?: JSX.Element;
-  }[];
+interface FloatingNavProps {
+  navItems: NavItem[];
   className?: string;
-}) => {
-  const { scrollYProgress } = useScroll();
+}
 
+export const FloatingNav: React.FC<FloatingNavProps> = ({ navItems, className }) => {
+  const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
     if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
+      const previous = scrollYProgress.getPrevious() ?? 0;
+      const direction = current - previous;
 
       if (scrollYProgress.get() < 0.05) {
         setVisible(false);
       } else {
-        if (direction < 0) {
-          setVisible(true);
-        } else {
-          setVisible(false);
-        }
+        setVisible(direction < 0);
       }
     }
   });
@@ -44,35 +39,24 @@ export const FloatingNav = ({
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        initial={{
-          opacity: 1,
-          y: -100,
-        }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
+        initial={{ opacity: 1, y: -100 }}
+        animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
         className={cn(
-          "border border 1px solid bg-gray-950 rounded-full flex max-w-fit fixed top-10 top-4 left-1/2 transform -translate-x-1/2 rounded-full, z-[5000] pr-2 pl-8 py-2  items-center justify-center space-x-4",
+          "border bg-gray-950 rounded-full flex max-w-fit fixed top-4 left-1/2 transform -translate-x-1/2 z-[5000] pr-2 pl-8 py-2 items-center justify-center space-x-4",
           className
         )}
       >
-        {navItems.map((navItem: any, idx: number) => (
+        {navItems.map((navItem, idx) => (
           <a
-            key={`link=${idx}`}
+            key={`link-${idx}`}
             href={navItem.link}
-            className={cn(
-              "text-white hover:text-purple-500 items-center flex space-x-1"
-            )}
+            className="text-white hover:text-purple-500 items-center flex space-x-1"
           >
             <span className="block sm:hidden">{navItem.icon}</span>
             <span className="hidden sm:block text-lg font-bold">{navItem.name}</span>
           </a>
         ))}
-        
       </motion.div>
     </AnimatePresence>
   );

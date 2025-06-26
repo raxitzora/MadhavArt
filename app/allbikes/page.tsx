@@ -22,7 +22,7 @@ const AllBikes = () => {
                 src={bike.image}
                 alt={bike.name}
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
             <p className="mt-2 text-center font-extrabold text-2xl text-yellow-500">

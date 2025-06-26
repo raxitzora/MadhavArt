@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
+
 import {
   motion,
   useMotionValue,
@@ -157,9 +159,12 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({
               }}
             >
             <div className="flex flex-col items-center justify-center gap-2">
-  <img
+  <Image
     src={img.url}
     alt={img.title}
+    width={300}
+    height={200}
+
     className="w-full h-full max-w-[300px] max-h-[200px]"
   />
   <p className="text-white text-3xl font-extrabold text-center uppercase">{img.title}</p>

@@ -47,7 +47,7 @@ export const FloatingNav: React.FC<FloatingNavProps> = ({ navItems, className })
           className
         )}
       >
-        {navItems.map((navItem, idx) => (
+        {navItems.map((navItem:NavItem, idx:number) => (
           <a
             key={`link-${idx}`}
             href={navItem.link}

@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import {
   motion,
+  number,
   useAnimationFrame,
   useMotionTemplate,
   useMotionValue,
@@ -88,7 +89,7 @@ export const MovingBorder = ({
   const pathRef = useRef<SVGRectElement | null>(null);
   const progress = useMotionValue(0);
 
-  useAnimationFrame((time) => {
+  useAnimationFrame((time:number) => {
     const length = pathRef.current?.getTotalLength();
     if (length) {
       const pxPerMillisecond = length / duration;
@@ -96,10 +97,10 @@ export const MovingBorder = ({
     }
   });
 
-  const x = useTransform(progress, (val) =>
+  const x = useTransform(progress, (val:number) =>
     pathRef.current?.getPointAtLength(val).x ?? 0
   );
-  const y = useTransform(progress, (val) =>
+  const y = useTransform(progress, (val:number) =>
     pathRef.current?.getPointAtLength(val).y ?? 0
   );
 

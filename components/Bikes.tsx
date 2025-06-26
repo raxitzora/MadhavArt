@@ -6,6 +6,8 @@ import { demoBikes } from "@/data/demoBikes";
 import { TextHoverEffect } from "./ui/text-hover-effect";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import Link from "next/link";
+import Image from "next/image"; // ✅ Add this at the top
+
 
 const Bikes = () => {
   return (
@@ -35,13 +37,17 @@ const Bikes = () => {
 
               {/* Bike Image */}
               <CardItem translateZ={100} className="w-full mt-4">
-                <img
-                  src={bike.image}
-                  alt={bike.name}
-                  loading="lazy"
-                  className="h-60 w-full object-cover rounded-2xl group-hover/card:shadow-xl transition-shadow duration-300"
-                />
-              </CardItem>
+  <div className="relative w-full h-60 rounded-2xl overflow-hidden group-hover/card:shadow-xl transition-shadow duration-300">
+    <Image
+      src={bike.image}
+      alt={bike.name}
+      fill
+      sizes="(max-width: 768px) 100vw, 33vw"
+      className="object-cover rounded-2xl"
+    />
+  </div>
+</CardItem>
+
             </CardBody>
           </CardContainer>
         ))}

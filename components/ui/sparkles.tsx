@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState, useId } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import type { Container, SingleOrMultiple } from "@tsparticles/engine";
+import type { Container } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
-import { motion, useAnimation } from "framer-motion"; // ✅ Corrected import
+import { motion, useAnimation } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type ParticlesProps = {
@@ -67,17 +67,14 @@ export const SparklesCore = ({
               events: {
                 onClick: { enable: true, mode: "push" },
                 onHover: { enable: false },
-                resize: true, // ✅ No `as any`
-              },
+              },  
               modes: {
                 push: { quantity: 4 },
                 repulse: { distance: 200, duration: 0.4 },
               },
             },
             particles: {
-              color: {
-                value: particleColor || "#ffffff",
-              },
+              color: { value: particleColor || "#ffffff" },
               move: {
                 enable: true,
                 speed: speed || 1,
@@ -101,9 +98,7 @@ export const SparklesCore = ({
                   startValue: "random",
                 },
               },
-              shape: {
-                type: "circle",
-              },
+              shape: { type: "circle" },
               size: {
                 value: {
                   min: minSize || 1,

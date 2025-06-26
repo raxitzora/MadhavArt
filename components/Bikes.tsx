@@ -43,7 +43,7 @@ const Bikes = () => {
       alt={bike.name}
       fill
       sizes="(max-width: 768px) 100vw, 33vw"
-      className="object-cover rounded-2xl"
+      className="object-fit rounded-2xl"
     />
   </div>
 </CardItem>

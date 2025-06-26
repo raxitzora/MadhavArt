@@ -2,7 +2,6 @@
 import React, { useRef } from "react";
 import {
   motion,
-  number,
   useAnimationFrame,
   useMotionTemplate,
   useMotionValue,

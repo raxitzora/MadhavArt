@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image"; // ✅ Add this at the top
 
 
+
 const Bikes = () => {
   return (
     <section id="bikes" className="py-20 px-4 md:px-8 lg:px-16 w-full max-w-screen-2xl mx-auto">
